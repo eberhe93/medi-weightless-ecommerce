@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class MediweightlossConfig(AppConfig):
-    name = 'mediweightloss'
+    name = 'medi_ecommerce_rest_api'
