@@ -1,8 +1,10 @@
 import React from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
 import styles from '../../modules/styles';
+import { connect } from 'react-redux';
+import { getNumbers } from '../../actions/getAction';
 
-const Navbar = () => (
+const Navbar = props => (
   <header>
     <div style={styles.navBar.navOverlay}></div>
     <nav>
@@ -17,7 +19,7 @@ const Navbar = () => (
         <li className="cart">
           <a href="#" style={styles.navBar.navCartButton}>
             <TiShoppingCart />
-            Cart <span> 0</span>
+            Cart <span> {props.cartProps.cartNumber} </span>
           </a>
         </li>
       </ul>
@@ -25,4 +27,9 @@ const Navbar = () => (
   </header>
 );
 
-export default Navbar;
+
+const mapStateToProps = state => ({
+  cartProps: state.cartState
+})
+
+export default connect(mapStateToProps, {getNumbers})(Navbar);
