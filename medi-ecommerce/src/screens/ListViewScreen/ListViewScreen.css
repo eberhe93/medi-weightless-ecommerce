@@ -1,0 +1,23 @@
+.image {
+    margin-right:20px;
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+.image:hover .cart{
+    bottom: 47px;
+    opacity: 1;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.addToCartButton {
+    position: absolute;
+    width: 100%;
+    background-color:darkgrey;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    cursor: pointer;
+    text-align: center;
+}
