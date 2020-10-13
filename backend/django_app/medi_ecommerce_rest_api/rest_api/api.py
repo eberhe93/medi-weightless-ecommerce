@@ -5,8 +5,10 @@ from rest_framework.decorators import (api_view, permission_classes,
                                        renderer_classes)
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
-from medi_ecommerce_rest_api.models import Products
-from medi_ecommerce_rest_api.serializers import ProductsSerializer
+from medi_ecommerce_rest_api.models import Products, ProductDetails, OrderCreate
+from medi_ecommerce_rest_api.serializers import ProductsSerializer, ProductDetailsSerializer
+from django.shortcuts import get_object_or_404, get_list_or_404
+
 
 try:
     import ujson as json
@@ -21,6 +23,17 @@ def api_products_list(request):
         POST new product
     """
     if request.method == 'POST':
+        if 'name' not in request.data:
+            return Response('name is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'code' not in request.data:
+            return Response('code is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'cost' not in request.data:
+            return Response('cost is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'description' not in request.data:
+            return Response('description is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'inventory_on_hand' not in request.data:
+            return Response('inventory_on_hand is required', status=status.HTTP_417_EXPECTATION_FAILED)
+
         obj = Products.objects.create(**request.data)
         return Response({"success": "true", "product_code": obj.code}, status=status.HTTP_200_OK)
     else:
@@ -34,7 +47,9 @@ def api_products_list(request):
 def api_product_individual(request, product_id=None):
     """ GET product individual data
     """
-    return Response({"success": "true", "api_function": "api_product_individual", "product_id": product_id, "data": []}, status=status.HTTP_200_OK)
+
+    product = ProductsSerializer(get_object_or_404(Products, pk=product_id))
+    return Response({"data": product.data}, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @renderer_classes([JSONRenderer])
@@ -43,7 +58,8 @@ def api_products_details(request, product_id=None):
     """ GET products_details by product_id
     """
 
-    return Response({"success": "true", "api_function": "api_products_details", "product_id": product_id, "data": []}, status=status.HTTP_200_OK)
+    product_details = ProductDetailsSerializer(get_list_or_404(ProductDetails, product=product_id))
+    return Response({"product_details": product_details.data }, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @renderer_classes([JSONRenderer])
@@ -54,4 +70,21 @@ def api_products_purchase(request, product_id=None):
     if request.data == {}:
         return Response('No data in POST', status=status.HTTP_417_EXPECTATION_FAILED)
 
-    return Response({"success": "true", "api_function": "api_products_purchase", "product_id": product_id, "data": []}, status=status.HTTP_200_OK)
+    if request.method == 'POST':
+        if 'customer_name' not in request.data:
+            return Response('customer_name is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'customer_email' not in request.data:
+            return Response('customer_email is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'customer_phone' not in request.data:
+            return Response('customer_phone is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'shipping_address' not in request.data:
+            return Response('shipping_address is required', status=status.HTTP_417_EXPECTATION_FAILED)
+
+        if 'billing_address' not in request.data:
+            return Response('billing_address is required', status=status.HTTP_417_EXPECTATION_FAILED)
+        if 'purchase_products' not in request.data:
+            return Response('purchase_products is required', status=status.HTTP_417_EXPECTATION_FAILED)
+
+        product = get_object_or_404(Products, pk=product_id)
+        obj = OrderCreate.objects.create(**request.data, product=product)
+        return Response({"success": "true", "order_create_id": obj.order_create_id}, status=status.HTTP_200_OK)
