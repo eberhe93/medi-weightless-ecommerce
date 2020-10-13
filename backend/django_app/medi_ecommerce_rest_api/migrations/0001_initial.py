@@ -47,6 +47,7 @@ class Migration(migrations.Migration):
                 ('product_details_id', models.AutoField(auto_created=True, primary_key=True, serialize=False)),
                 ('product_type', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True)),
                 ('category', django.contrib.postgres.fields.jsonb.JSONField(blank=True, null=True)),
+                ('pushed_product', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
                 ('product', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='medi_ecommerce_rest_api.Products')),
             ],
