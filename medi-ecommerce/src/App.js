@@ -5,17 +5,15 @@ import Navbar from './components/Navbar/Navbar';
 import ListViewScreen from './screens/ListViewScreen/ListViewScreen';
 import { Provider } from 'react-redux';
 import store from './store';
-import {BrowserRouter, Route, Switch } from'react-router-dom';
+import { withRouter } from 'react-router';
+import routes from '../src/modules/routes';
 
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <BrowserRouter>
         <Navbar />
-        <ListViewScreen />
-        App Home
-        </BrowserRouter>
+        {routes}
       </div>
     </Provider>
   );

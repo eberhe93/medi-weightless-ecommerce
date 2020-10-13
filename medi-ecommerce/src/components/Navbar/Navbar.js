@@ -2,30 +2,33 @@ import React from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
 import styles from '../../modules/styles';
 import { connect } from 'react-redux';
-import { getNumbers } from '../../actions/getAction';
+import { getNumbers, getProductList } from '../../actions/getAction';
+import { Link } from 'react-router-dom';
 
-const Navbar = props => (
+const Navbar = props => {
+  console.log(props)
+  return(
   <header>
     <div style={styles.navBar.navOverlay}></div>
     <nav>
       <h2>Medi Weightloss</h2>
       <ul>
         <li>
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="#">Contact Us</a>
+          <Link to="#">Contact Us</Link>
         </li>
         <li className="cart">
-          <a href="#" style={styles.navBar.navCartButton}>
+          <Link to="/checkout" style={styles.navBar.navCartButton}>
             <TiShoppingCart />
             Cart <span> {props.cartProps.cartNumber} </span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
-  </header>
-);
+  </header>)
+};
 
 
 const mapStateToProps = state => ({

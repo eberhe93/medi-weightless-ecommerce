@@ -1,7 +1,9 @@
-import { ADD_PRODUCT_TO_BASKET, GET_NUMBERS_IN_BASKET } from '../actions/types';
+import { ADD_PRODUCT_TO_BASKET, GET_NUMBERS_IN_BASKET, GET_PRODUCT_LIST } from '../actions/types';
+import Api from '../modules/api';
 
 const initialState = {
-    cartNumber: 0
+    cartNumber: 0,
+    cartTotal: 0,
 }
 
 export default (state = initialState, action) => {
