@@ -1,0 +1,94 @@
+.checkoutParentDiv{
+    margin-top: -2%;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* flex-direction: row; */
+    /* margin:0 10%; */
+    align-self: center;
+    
+}
+
+.checkoutContainer {
+    /* border: 1px gray solid; */
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: row;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.formContainer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.fieldStyle {
+    margin: 30px 0;
+}
+
+.progressBar {
+    margin: 0 auto;
+    width: 60%
+}
+
+.productDiv {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.checkout-parent-div {
+    /* background-color: red; */
+    width: 90%;
+    margin: 0 auto;
+}
+
+.purchased-item-div {
+    /* background-color: blue; */
+    height: 15%;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: space-between;
+
+}
+
+.checkout-form {
+    /* background-color: red; */
+    margin-top: 5%;
+    height: 80%;
+}
+
+.purchased-item-text {
+    width:20%;
+}
+.purchased-items-list {
+    /* background-color: blue; */
+    width: 18%;
+}
+
+.no-items-message {
+    width: 22%;
+}
+
+.image {
+    height: 60%;
+}
+
+.root {
+    max-width: 100px;
+  }
+
+.media {
+    height: 140px,
+  }
+
+  .inner-purchased-div {
+      border-bottom: 1px black solid;
+      width: 80%;
+      margin: 0 auto;
+     }
+
+     .inner-purchased-div h2 {
+         text-align: center;
+     }

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import { Provider } from 'react-redux';
+import store from './store';
+import routes from '../src/modules/routes';
+import {Api} from './modules/api';
 
-function App() {
+class App extends Component {
+  render(){
   return (
-    <div className="App">
-      <Navbar />
-     App Home
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Navbar />
+        {routes}
+      </div>
+    </Provider>
   );
+}
 }
 
 export default App;
