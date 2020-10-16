@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'medi_ecommerce_rest_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'medi_ecommercedb',
+        'NAME': 'db',
         'USER': 'postgres',
         'PASSWORD': 'postgres_password',
         'HOST': '127.0.0.1',

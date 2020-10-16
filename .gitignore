@@ -1,0 +1,13 @@
+*.pyc
+
+__ pycache __
+
+venv
+
+/static
+
+.DS_Store
+
+node_modules/
+
+~/.cache/
