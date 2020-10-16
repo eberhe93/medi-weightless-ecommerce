@@ -3,14 +3,14 @@
 
 # Quick Steps Ensure that you are on the "developement" branch.
 To get backend running:
-2. Run pip install -r requirements.txt
-3. CD into backend/django_app.
-4. Run python3 manage.py migrate
-5. Run python3 manage.py runserver
+- Run pip install -r requirements.txt
+- CD into backend/django_app.
+- Run python3 manage.py migrate
+- Run python3 manage.py runserver
 To run frontend, in a new terminal:
-1. CD into medi-ecommerce
-2. Run npm install
-3. Run npm start
+- CD into medi-ecommerce
+- Run npm install
+- Run npm start
 
 Enjoy!
 
