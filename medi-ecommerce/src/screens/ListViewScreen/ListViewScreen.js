@@ -31,7 +31,6 @@ class ListViewScreen extends Component {
           return response.json();
         })
         .then(data => {
-          console.log(data);
           this.setState({ products: data.data });
         })
     ).catch(err => {
