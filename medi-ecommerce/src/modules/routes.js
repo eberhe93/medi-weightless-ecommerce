@@ -1,6 +1,6 @@
 
-import React, { Component } from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import ListViewScreen from '../screens/ListViewScreen/ListViewScreen';
 import CartCheckoutPage from '../screens/CartPage/CartCheckoutPage';
 import ProductDetailScreen from '../screens/ProductDetailScreen/ProductDetailScreen'

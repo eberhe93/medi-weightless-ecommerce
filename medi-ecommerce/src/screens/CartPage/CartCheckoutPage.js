@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import { Api } from '../../modules/api';
 import { Redirect } from 'react-router';
 import { ImMinus, ImPlus } from 'react-icons/im';
-import { MdDelete } from 'react-icons/md';
-import CartItemsList from '../../components/CartItemsList/CartItemsList';
 import CheckoutForm from '../../components/CheckoutForm/CheckoutForm';
 import MealPlanImage from '../../assets/meal-plan-template.jpg';
 import { resetCartNumber, increaseQuantity } from '../../actions/addAction';
 import { decreaseQuantity } from '../../actions/subtractAction';
 import { connect } from 'react-redux';
-import MediLogo from '../../assets/medi-logo.png';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
@@ -40,7 +36,8 @@ class CartCheckoutPage extends Component {
       },
       cart: [],
       isLoading: false,
-      redirect: false
+      redirect: false,
+      toastMessage: '',
     };
 
     this.submitPurchase = this.submitPurchase.bind(this);
@@ -140,35 +137,31 @@ class CartCheckoutPage extends Component {
     setTimeout(() => {
       Api.submitPurchase(code, orderObj).then(res => {
         if (res.status === 200) {
-          res.json().then(data => this.successHandler());
+          res.json().then(data => this.toastMessageHandler('success'));
         } else {
           res
             .json()
             .then(json => {
               // handle response
               console.log(json);
-              this.failedHandler();
+              this.toastMessageHandler('error');
             })
             .catch(ex => {
               console.log(res.status);
-              this.failedHandler();
+              this.toastMessageHandler('error');
             });
         }
       });
     }, 2000);
+  }
 
-    setTimeout(() => {
+  toastMessageHandler(msg){
+    this.setState({ isLoading: false,toastMessage: msg})
+        setTimeout(() => {
       this.props.resetCartNumber();
-    }, 2000);
-  }
-  successHandler() {
-    alert('You have successfully placed your order!');
-    this.setState({ redirect: true });
-  }
+      this.setState({ redirect: true });
+    }, 5000);
 
-  failedHandler() {
-    alert('An error has occurced.');
-    this.setState({ redirect: true });
   }
 
   resetForm() {
@@ -190,15 +183,16 @@ class CartCheckoutPage extends Component {
       },
       cart: [],
       isLoading: false,
-      redirect: false
+      redirect: false,
+      toastMessage: ''
     });
   }
 
   renderItems() {
     const {cart} = this.state;
     return cart && cart.length > 0 ? (
-      cart.map(product => (
-        <Card className="root">
+      cart.map((product, i) => (
+        <Card className="root" key={i}>
           <CardActionArea>
             <img src={MealPlanImage} />
             <CardContent>

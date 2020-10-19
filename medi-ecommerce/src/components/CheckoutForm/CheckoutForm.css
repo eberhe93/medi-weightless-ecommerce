@@ -31,13 +31,11 @@
 }
 
 .checkout-parent-div {
-    /* background-color: red; */
     width: 90%;
     margin: 0 auto;
 }
 
 .purchased-item-div {
-    /* background-color: blue; */
     height: 50%;
     display: flex;
     width: 80%;

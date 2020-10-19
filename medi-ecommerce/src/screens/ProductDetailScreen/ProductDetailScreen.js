@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Api } from '../../modules/api';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core/';
 import { addToBasket } from '../../actions/addAction';
 import { connect } from 'react-redux';
 import MealPlanImage from '../../assets/meal-plan-template.jpg';

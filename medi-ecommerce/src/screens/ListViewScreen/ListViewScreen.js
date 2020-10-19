@@ -53,8 +53,8 @@ class ListViewScreen extends Component {
         </div>
       );
     } else {
-      return products.map(product => (
-        <div className="card">
+      return products.map((product, i) => (
+        <div className="card" key={i}>
           <Link to={`/detail/${product.code}`}>
             <img src={MealPlanImage} alt="" />
           </Link>
