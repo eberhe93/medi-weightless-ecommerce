@@ -35,11 +35,13 @@ You will be dropped into the listview screen initially. From there, you have the
 - Material UI
 
 ### Endpoints:
+```
 **GET**: '/data': ran initially to populate the database with data (products)
 **GET**: '/products': to return list of products
 **GET**: '/products/<int:product_id>/': to return individual product 
 **GET**: '/products/<int:product_id>/details': to return individual product details
 **POST**:'/products/<int:product_id>/purchase': to purchase a product 
+```
 
 ## Testing:
 
@@ -50,9 +52,8 @@ python manage.py test --verbosity=2
 ```
 
 ### Postman Unit 
-```
 Should be done a clean database and ran separately from the app, due to the '/data' call being used to populate data. This will result in an error if data has already been populated within the database.
-```
+
 Run:
 ```
 python manage.py migrate
