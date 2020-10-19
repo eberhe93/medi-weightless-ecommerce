@@ -69,4 +69,4 @@ python manage.py runserver
 
 ```
 
-Enjoy!
+Enjoy my first Django project!
