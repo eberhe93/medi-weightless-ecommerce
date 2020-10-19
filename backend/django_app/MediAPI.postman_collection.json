@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "7b85130c-c8e5-4222-a886-75f31207dcdf",
+		"name": "MediAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b46a63e-2b4b-437f-a923-f97650383c1e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "application/json"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a6607598-940c-4ec6-9ac8-dba9394c1d54",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Product with code 1 exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data[0].code).to.eql(1);",
+							"});"
+						],
+						"type": "application/json"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "559e911f-5e50-492e-8aa6-ad06b4e71368",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Product 1 exists\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.code).to.eql(1);",
+							"    pm.expect(jsonData.data.name).to.eql(\"Clean Eating: 1 Meal Per Day\");",
+							"    pm.expect(jsonData.data.cost).to.eql(99.00);",
+							"    pm.expect(jsonData.data.description).to.eql(\"Enjoy our balanced approach to clean eating with whole grains, lean proteins, and veggies – without any added preservatives or artificial ingredients. Perfect for a wide variety of diets, clean meals are free from dairy, gluten, and soy and low in sodium.\");",
+							"    pm.expect(jsonData.data.inventory_on_hand).to.eql(2);",
+							"});"
+						],
+						 "type": "application/json"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read Product Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d710cb2-4e75-495f-a302-5fdf21e65db9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.product_details[0].product.code).to.eql(1);",
+							"    pm.expect(jsonData.product_details[0].product.name).to.eql(\"Clean Eating: 1 Meal Per Day\");",
+							"    pm.expect(jsonData.product_details[0].product.cost).to.eql(99.00);",
+							"    pm.expect(jsonData.product_details[0].product.description).to.eql(\"Enjoy our balanced approach to clean eating with whole grains, lean proteins, and veggies – without any added preservatives or artificial ingredients. Perfect for a wide variety of diets, clean meals are free from dairy, gluten, and soy and low in sodium.\");",
+							"    pm.expect(jsonData.product_details[0].product_type.type).to.eql(\"Food Service\");",
+							"    pm.expect(jsonData.product_details[0].product_type.type_name).to.eql(\"Service\");",
+							"    pm.expect(jsonData.product_details[0].category.name).to.eql(\"categ 1\");",
+							"    pm.expect(jsonData.product_details[0].category.type).to.eql(\"nostrud non veniam\");",
+							"});"
+						],
+						"type": "application/json"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/products/1/details",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Purchase Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6113a4e2-2ddb-4b78-bed2-20768855e84d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "application/json"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"customer_name\": \"John Doe\",\n\"customer_email\": \"Johndoe@aol.com\",\n\"customer_phone\": [\n{\n\"number\": 18953712,\n\"type\": \"voluptate sunt consequat aliqua occaecat\",\n\"contact\": true\n},\n{\n\"number\": 46388657,\n\"type\": \"quis\",\n\"contact\": true\n}\n],\n\"shipping_address\": [\n{\n\"street\": \"1230 E Street\",\n\"city\": \"Tampa\",\n\"state\": \"Florida\",\n\"zipcode\": 20202\n}\n],\n\"billing_address\": [\n{\n\"street\": \"amet dolor ut do consectetur\",\n\"city\": \"Tampa\",\n\"state\": \"Florida\",\n\"zipcode\": 20202\n},\n{\n\"street\": \"nulla velit voluptate pariatur\",\n\"city\": \"Tampa\",\n\"state\": \"Florida\",\n\"zipcode\": 20202\n}\n],\n\"purchase_products\": [\n{\n\"code\": 1,\n\"quantity\": 2\n}\n],\n\"order_total\": 201\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/products/1/purchase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1",
+						"purchase"
+					]
+				}
+			},			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
