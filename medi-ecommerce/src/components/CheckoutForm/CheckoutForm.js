@@ -1,15 +1,10 @@
 import React from 'react';
 import {
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Button,
   LinearProgress
 } from '@material-ui/core/';
 import './CheckoutForm.css';
+import ToastMessage from '../ToastMessage/ToastMessage';
 
 const CheckoutForm = props => {
   const {
@@ -46,68 +41,68 @@ const CheckoutForm = props => {
                 onChange={e => contactValuesHandler(e)}
               />{' '}
             </div>
-            Billing Address
+            Billing Address *
             <TextField
               fullWidth={true}
               id="standard-basic"
-              label="Street *"
+              label="Street"
               name="street"
-              value={values.billingAddress['street']}
+              value={values.billingAddress.street}
               onChange={e => billingValuesHandler(e)}
             />
             <div className="address-form">
               <TextField
                 id="standard-basic"
-                label="City *"
+                label="City"
                 name="city"
-                value={values.billingAddress['city']}
+                value={values.billingAddress.city}
                 onChange={e => billingValuesHandler(e)}
               />
               <TextField
                 id="standard-basic"
-                label="State *"
+                label="State"
                 name="state"
-                value={values.billingAddress['state']}
+                value={values.billingAddress.state}
                 onChange={e => billingValuesHandler(e)}
               />
               <TextField
                 id="standard-basic"
-                label="Zipcode *"
+                label="Zipcode"
                 name="zipcode"
-                value={values.billingAddress['zipcode']}
+                value={values.billingAddress.zipcode}
                 onChange={e => billingValuesHandler(e)}
               />
             </div>
             <div className="field-style">
-              Shipping Address
+              Shipping Address *
               <TextField
                 fullWidth={true}
                 id="standard-basic"
-                label="Street *"
+                label="Street"
                 name="street"
-                value={values.shippingAddress['street']}
+                value={values.shippingAddress.street}
                 onChange={e => shippingValuesHandler(e)}
               />
               <div className="address-form">
                 <TextField
                   id="standard-basic"
-                  label="City *"
+                  label="City"
                   name="city"
-                  value={values.shippingAddress['city']}
+                  value={values.shippingAddress.name}
                   onChange={e => shippingValuesHandler(e)}
                 />
                 <TextField
                   id="standard-basic"
-                  label="State *"
+                  label="State"
                   name="state"
-                  value={values.shippingAddress['state']}
+                  value={values.shippingAddress.state}
                   onChange={e => shippingValuesHandler(e)}
                 />
                 <TextField
                   id="standard-basic"
-                  label="Zipcode *"
+                  label="Zipcode"
                   name="zipcode"
-                  value={values.shippingAddress['zipcode']}
+                  value={values.shippingAddress.zipcode}
                   onChange={e => shippingValuesHandler(e)}
                 />
               </div>
@@ -118,7 +113,7 @@ const CheckoutForm = props => {
           <div className="progress-bar">
             <LinearProgress />
           </div>
-        ) : null}
+        ) : values.toastMessage !== '' ? <ToastMessage msg={values.toastMessage}/>: null}
       </div>
     </div>
   );

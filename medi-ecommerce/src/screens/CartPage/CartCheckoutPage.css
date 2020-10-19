@@ -1,17 +1,10 @@
 .checkoutParentDiv{
     margin-top: -2%;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* flex-direction: row; */
-    /* margin:0 10%; */
     align-self: center;
     
 }
 
 .checkoutContainer {
-    /* border: 1px gray solid; */
-    /* display: flex; */
-    /* align-items: center; */
     justify-content: center;
     flex-direction: row;
     width: 60%;
@@ -38,13 +31,11 @@
 }
 
 .checkout-parent-div {
-    /* background-color: red; */
     width: 90%;
     margin: 0 auto;
 }
 
 .purchased-item-div {
-    /* background-color: blue; */
     height: 15%;
     display: flex;
     width: 50%;
@@ -54,7 +45,6 @@
 }
 
 .checkout-form {
-    /* background-color: red; */
     margin-top: 5%;
     height: 80%;
 }
@@ -63,7 +53,6 @@
     width:20%;
 }
 .purchased-items-list {
-    /* background-color: blue; */
     width: 18%;
 }
 
