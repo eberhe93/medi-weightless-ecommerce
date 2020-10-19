@@ -1,5 +1,5 @@
 # medi-weightless-ecommerce
-Quick Steps Ensure that you are on the "developement" branch.
+Quick Steps: Ensure that you are on the "developement" branch.
 
 ### To get backend running:
 Run:
