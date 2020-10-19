@@ -52,7 +52,7 @@ python manage.py test --verbosity=2
 ```
 
 ### Postman Unit: 
-Should be done a clean database and ran separately from the app, due to the '/data' call being used to populate data. This will result in an error if data has already been populated within the database.
+Should be done with a clean database and ran separately from the app, due to the '/data' call being used to populate data. This will result in an error if data has already been populated within the database.
 
 Run:
 ```
