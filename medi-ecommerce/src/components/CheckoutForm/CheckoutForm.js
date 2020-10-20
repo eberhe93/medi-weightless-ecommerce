@@ -9,6 +9,7 @@ const CheckoutForm = props => {
     contactValuesHandler,
     billingValuesHandler,
     shippingValuesHandler,
+    phoneNumberHandler,
     values
   } = props;
   return (
@@ -39,7 +40,7 @@ const CheckoutForm = props => {
                 label="Phone Number *"
                 name="phoneNumber"
                 value={values.phoneNumber}
-                onChange={e => contactValuesHandler(e)}
+                onChange={e => phoneNumberHandler(e)}
                 inputProps={{ maxLength: 10 }}
               />{' '}
             </div>
@@ -72,6 +73,7 @@ const CheckoutForm = props => {
                 label="Zipcode"
                 name="zipcode"
                 value={values.billingAddress.zipcode}
+                inputProps={{ maxLength: 6 }}
                 onChange={e => billingValuesHandler(e)}
               />
             </div>
@@ -105,6 +107,7 @@ const CheckoutForm = props => {
                   label="Zipcode"
                   name="zipcode"
                   value={values.shippingAddress.zipcode}
+                  inputProps={{ maxLength: 6 }}
                   onChange={e => shippingValuesHandler(e)}
                 />
               </div>
