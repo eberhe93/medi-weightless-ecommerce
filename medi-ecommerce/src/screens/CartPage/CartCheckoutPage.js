@@ -35,6 +35,7 @@ class CartCheckoutPage extends Component {
         zipcode: ''
       },
       cart: [],
+      isValidEmail: true,
       isLoading: false,
       redirect: false,
       toastMessage: '',
@@ -44,6 +45,7 @@ class CartCheckoutPage extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBillingAddress = this.handleBillingAddress.bind(this);
     this.handleShippingAddress = this.handleShippingAddress.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
   }
 
   componentDidMount() {
@@ -105,55 +107,66 @@ class CartCheckoutPage extends Component {
     this.setState({ shippingAddress: currentState });
   }
 
-  submitPurchase() {
-    this.setState({ isLoading: true });
-    let total =
-      this.props.cartProps.cartNumber *
-      this.props.cartProps.selectedProduct.cost;
-    const { code } = this.props.cartProps.selectedProduct;
-    const {
-      name,
-      email,
-      phoneNumber,
-      shippingAddress,
-      billingAddress
-    } = this.state;
-
-    let orderObj = {
-      customer_name: name,
-      customer_email: email,
-      customer_phone: phoneNumber,
-      shipping_address: shippingAddress,
-      billing_address: billingAddress,
-      purchase_products: [
-        {
-          code: code,
-          quantity: this.props.cartProps.cartNumber
-        }
-      ],
-      order_total: total
-    };
-
-    setTimeout(() => {
-      Api.submitPurchase(code, orderObj).then(res => {
-        if (res.status === 200) {
-          res.json().then(data => this.toastMessageHandler('success'));
-        } else {
-          res
-            .json()
-            .then(json => {
-              // handle response
-              console.log(json);
-              this.toastMessageHandler('error');
-            })
-            .catch(ex => {
-              console.log(res.status);
-              this.toastMessageHandler('error');
-            });
-        }
-      });
-    }, 2000);
+  validateEmail() {
+    const {email} = this.state;
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailTest = regexp.test(email);
+    this.setState({ isValidEmail: emailTest})
+    if(emailTest){
+      this.submitPurchase();
+    }
   }
+  
+  submitPurchase() {
+      const { code } = this.props.cartProps.selectedProduct;
+      const {
+        name,
+        email,
+        phoneNumber,
+        shippingAddress,
+        billingAddress,
+        isValidEmail
+      } = this.state;
+        this.setState({ isLoading: true });
+        let total =
+          this.props.cartProps.cartNumber *
+          this.props.cartProps.selectedProduct.cost;
+    
+        let orderObj = {
+          customer_name: name,
+          customer_email: email,
+          customer_phone: phoneNumber,
+          shipping_address: shippingAddress,
+          billing_address: billingAddress,
+          purchase_products: [
+            {
+              code: code,
+              quantity: this.props.cartProps.cartNumber
+            }
+          ],
+          order_total: total
+        };
+    
+        setTimeout(() => {
+          Api.submitPurchase(code, orderObj).then(res => {
+            if (res.status === 200) {
+              res.json().then(data => this.toastMessageHandler('success'));
+            } else {
+              res
+                .json()
+                .then(json => {
+                  // handle response
+                  console.log(json);
+                  this.toastMessageHandler('error');
+                })
+                .catch(ex => {
+                  console.log(res.status);
+                  this.toastMessageHandler('error');
+                });
+            }
+          });
+        }, 2000);    
+      }
 
   toastMessageHandler(msg){
     this.setState({ isLoading: false,toastMessage: msg})
@@ -183,6 +196,7 @@ class CartCheckoutPage extends Component {
       },
       cart: [],
       isLoading: false,
+      isValidEmail: true,
       redirect: false,
       toastMessage: ''
     });
@@ -267,7 +281,7 @@ class CartCheckoutPage extends Component {
               <div style={{ width: '5%', margin: '0 auto' }}>
                 <Button
                   disabled={!this.checkValid()}
-                  onClick={this.submitPurchase}
+                  onClick={this.validateEmail}
                 >
                   Submit
                 </Button>
