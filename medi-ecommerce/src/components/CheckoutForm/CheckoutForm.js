@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  TextField,
-  LinearProgress
-} from '@material-ui/core/';
+import { TextField, LinearProgress } from '@material-ui/core/';
 import './CheckoutForm.css';
 import ToastMessage from '../ToastMessage/ToastMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const CheckoutForm = props => {
   const {
@@ -26,19 +24,23 @@ const CheckoutForm = props => {
                 value={values.name}
                 onChange={e => contactValuesHandler(e)}
               />
-              <TextField
-                id="standard-basic"
-                label="Email *"
-                name="email"
-                value={values.email}
-                onChange={e => contactValuesHandler(e)}
-              />
+              <div style={{margin:'0 auto'}}>
+                <TextField
+                  id="standard-basic"
+                  label="Email *"
+                  name="email"
+                  value={values.email}
+                  onChange={e => contactValuesHandler(e)}
+                />
+                {!values.isValidEmail ? <ErrorMessage /> : null}
+              </div>
               <TextField
                 id="standard-basic"
                 label="Phone Number *"
                 name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={e => contactValuesHandler(e)}
+                inputProps={{ maxLength: 10 }}
               />{' '}
             </div>
             Billing Address *
@@ -113,7 +115,9 @@ const CheckoutForm = props => {
           <div className="progress-bar">
             <LinearProgress />
           </div>
-        ) : values.toastMessage !== '' ? <ToastMessage msg={values.toastMessage}/>: null}
+        ) : values.toastMessage !== '' ? (
+          <ToastMessage msg={values.toastMessage} />
+        ) : null}
       </div>
     </div>
   );
